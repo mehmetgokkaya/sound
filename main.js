@@ -11,14 +11,25 @@
 // 4. Create a way to append the fetch results to your page
 
 // 5. Create a way to listen for a click that will play the song in the audio play
+const searchForm = document.querySelector('.search-form')
+const musicSearch = document.querySelector('#music-search')
 
-fetch('url', {
-  headers: {
-  }
+searchForm.addEventListener('submit', function (event) {
+  event.preventDefault()
+  var search = musicSearch.value
+  console.log(search)
+  // artistSearch(search)
 })
-  .then(function (response) {
-    return response.json()
-  })
-  .then(function (json) {
-    console.log(json)
-  })
+
+// function artistSearch (artist) {
+//   fetch('url', {
+//     headers: {
+//     }
+//   })
+//     .then(function (response) {
+//       return response.json()
+//     })
+//     .then(function (json) {
+//       console.log(json)
+//     })
+// }
