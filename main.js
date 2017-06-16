@@ -14,6 +14,12 @@
 const searchForm = document.querySelector('.search-form')
 const musicSearch = document.querySelector('#music-search')
 const resultsSection = document.querySelector('.results')
+const audio = document.querySelector('.music-player')
+
+function playTrack (currentTrackDiv) {
+  console.log(currentTrackDiv.id)
+  audio.src = `${currentTrackDiv.id}?client_id=8538a1744a7fdaa59981232897501e04`
+}
 
 searchForm.addEventListener('submit', function (event) {
   event.preventDefault()
@@ -65,22 +71,50 @@ function artistSearch (artist) {
       }
     })
 
-  function pullTracks (artistName) {
-    fetch(`https://api.soundcloud.com/users/${artistName}/tracks/?client_id=8538a1744a7fdaa59981232897501e04`)
+    // .then(function () {
+    //
+    //   // for (var i = 0; i < trackDiv.length; i++) {
+    //   //   // let trackID = trackDiv[i].id
+    //   //   trackDiv[i].addEventListener('click', function () {
+    //   //     console.log('clicked')
+    //   //     // console.log(trackID)
+    //   //   })
+    //   // }
+    // })
+
+  function pullTracks (selectedName) {
+    fetch(`https://api.soundcloud.com/users/${selectedName}/tracks/?client_id=8538a1744a7fdaa59981232897501e04&limit=100`)
         .then(function (response) {
           return response.json()
         })
         .then(function (json) {
           console.log(json)
+
+          while (resultsSection.hasChildNodes()) {
+            resultsSection.removeChild(resultsSection.firstChild)
+          }
+
+          if (json.length === 0) {
+            console.log('failure')
+            resultsSection.textContent = 'no tracks available'
+          } else {
+            console.log('success')
+            for (var i = 0; i < json.length; i++) {
+              let trackInfo = {}
+              trackInfo.id = json[i].stream_url
+              trackInfo.picture = json[i].artwork_url
+              trackInfo.title = json[i].title
+
+              let trackHTML = `
+
+                <div class="track" id="${trackInfo.id}" onclick="playTrack(this)">
+                  <img src="${trackInfo.picture}" alt="Album cover art" class="track-pic">
+                  <h3 class="track-title">${trackInfo.title}</h3>
+                </div>`
+
+              resultsSection.insertAdjacentHTML('beforeend', trackHTML)
+            }
+          }
         })
   }
-    //   fetch(`https://api.soundcloud.com/tracks/?client_id=8538a1744a7fdaa59981232897501e04&q=${artistClicked}`, {
-    //   })
-    //     .then(function (response) {
-    //       return response.json()
-    //     })
-    //     .then(function (json) {
-    //       console.log(json)
-    //     })
-    // })
 }

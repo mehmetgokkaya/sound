@@ -60,6 +60,22 @@ header {
   text-align: center;
 }
 
+.track {
+  cursor: pointer;
+  flex-basis: 22%;
+  margin-bottom: 2%;
+}
+
+.track-pic {
+  width: 18vw;
+  display: block;
+  margin: auto;
+}
+
+.track-title {
+  text-align: center;
+}
+
 /*-------RESPONSIVE DESIGN-------*/
 /*-------Tablet Display-------*/
 
