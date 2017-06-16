@@ -1,24 +1,27 @@
-/*
-  Here is a guide for the steps you could take:
-*/
 
-// 1. First select and store the elements you'll be working with
-
-// 2. Create your `onSubmit` event for getting the user's search term
-
-// 3. Create your `fetch` request that is called after a submission
-
-// 4. Create a way to append the fetch results to your page
-
-// 5. Create a way to listen for a click that will play the song in the audio play
 const searchForm = document.querySelector('.search-form')
 const musicSearch = document.querySelector('#music-search')
 const resultsSection = document.querySelector('.results')
 const audio = document.querySelector('.music-player')
+const widget = document.querySelector('.widget')
+
+var artistPlayingName = ''
 
 function playTrack (currentTrackDiv) {
   console.log(currentTrackDiv.id)
   audio.src = `${currentTrackDiv.id}?client_id=8538a1744a7fdaa59981232897501e04`
+  audio.autoplay = true
+
+  while (widget.hasChildNodes()) {
+    widget.removeChild(widget.firstChild)
+  }
+
+  let trackDivCopy = currentTrackDiv.cloneNode(true)
+  widget.appendChild(trackDivCopy)
+
+  let playHTML = `
+  <h3 class="widget-text">Currently playing:</h3>`
+  widget.insertAdjacentHTML('afterbegin', playHTML)
 }
 
 searchForm.addEventListener('submit', function (event) {
@@ -71,17 +74,6 @@ function artistSearch (artist) {
       }
     })
 
-    // .then(function () {
-    //
-    //   // for (var i = 0; i < trackDiv.length; i++) {
-    //   //   // let trackID = trackDiv[i].id
-    //   //   trackDiv[i].addEventListener('click', function () {
-    //   //     console.log('clicked')
-    //   //     // console.log(trackID)
-    //   //   })
-    //   // }
-    // })
-
   function pullTracks (selectedName) {
     fetch(`https://api.soundcloud.com/users/${selectedName}/tracks/?client_id=8538a1744a7fdaa59981232897501e04&limit=100`)
         .then(function (response) {
@@ -96,7 +88,7 @@ function artistSearch (artist) {
 
           if (json.length === 0) {
             console.log('failure')
-            resultsSection.textContent = 'no tracks available'
+            resultsSection.textContent = 'Unfortunately the artist you selected has no free tracks available for play. Please search again.'
           } else {
             console.log('success')
             for (var i = 0; i < json.length; i++) {
@@ -104,12 +96,14 @@ function artistSearch (artist) {
               trackInfo.id = json[i].stream_url
               trackInfo.picture = json[i].artwork_url
               trackInfo.title = json[i].title
+              trackInfo.artist = json[i].user.username
 
               let trackHTML = `
 
                 <div class="track" id="${trackInfo.id}" onclick="playTrack(this)">
                   <img src="${trackInfo.picture}" alt="Album cover art" class="track-pic">
-                  <h3 class="track-title">${trackInfo.title}</h3>
+                  <p class="track-title">Track: ${trackInfo.title}</p>
+                  <p class="track-artist">Artist: ${trackInfo.artist}</p>
                 </div>`
 
               resultsSection.insertAdjacentHTML('beforeend', trackHTML)

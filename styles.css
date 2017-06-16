@@ -8,8 +8,8 @@ img {
 }
 
 body {
-  font-family: sans-serif;
-  background-color: #60d9f1;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgb(137, 204, 198);
 }
 
 .container {
@@ -19,6 +19,26 @@ body {
 
 header {
   padding-top: 2%;
+}
+
+.widget {
+  text-align: center;
+  /*display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;*/
+}
+
+.widget .widget-text {
+  flex-basis: 25%;
+}
+
+.widget .track {
+  flex-basis: 25%;
+}
+
+.widget .track-pic {
+  width: 10vw;
 }
 
 .player {
@@ -35,6 +55,8 @@ header {
 
 .search-form input {
   font-size: 1.3rem;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
 }
 
 .results {
@@ -72,8 +94,10 @@ header {
   margin: auto;
 }
 
-.track-title {
+.track-title, .track-artist {
   text-align: center;
+  font-size: 0.5rem;
+  font-weight: 500;
 }
 
 /*-------RESPONSIVE DESIGN-------*/
