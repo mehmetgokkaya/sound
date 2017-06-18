@@ -20,7 +20,7 @@ function playTrack (currentTrackDiv) {
   widget.appendChild(trackDivCopy)
 
   let playHTML = `
-  <h3 class="widget-text">Currently playing:</h3>`
+  <h3 class="widget-text">Playing now:</h3>`
   widget.insertAdjacentHTML('afterbegin', playHTML)
 }
 
@@ -101,9 +101,9 @@ function artistSearch (artist) {
               let trackHTML = `
 
                 <div class="track" id="${trackInfo.id}" onclick="playTrack(this)">
-                  <img src="${trackInfo.picture}" alt="Album cover art" class="track-pic">
-                  <p class="track-title">Track: ${trackInfo.title}</p>
-                  <p class="track-artist">Artist: ${trackInfo.artist}</p>
+                  <img src="${trackInfo.picture}" alt="image not found" onerror=this.src="images/cd-case.png" class="track-pic">
+                  <p class="track-title">${trackInfo.title}</p>
+                  <p class="track-artist">${trackInfo.artist}</p>
                 </div>`
 
               resultsSection.insertAdjacentHTML('beforeend', trackHTML)

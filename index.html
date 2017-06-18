@@ -2,16 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>SoundCloud Music Search</title>
+    <title>MusicStorm</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="images/record-player.png"> <!-- favicon -->
+    <link rel="icon" type="image/png" href="images/lightning-bolt-SMALL.png"> <!-- favicon -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>Kinda Lame Music Site</h1>
+        <h1>MusicStorm</h1>
+        <img class="logo" src="images/lightning-bolt-SMALL.png" alt="Lightning bolt">
       </header>
       <section class="widget">
 
@@ -22,10 +23,30 @@
       <section class="search">
         <form class="search-form">
           <input type="text" name="music-search" id="music-search" placeholder="Search for an Artist">
-          <input type="submit" name="button" value="Find Artist">
+          <input type="submit" name="button" value="Find Artist" id="search-button">
         </form>
       </section>
-      <section class="results"></section>
+      <section class="results">
+        <div class="welcome-section">
+          <p class="welcome">Welcome to <em>MusicStorm</em>. We give you the opportunity to search and stream music from SoundCloud.com</p>
+          <div class="instruct-and-warn">
+            <div class="instructions">
+              <h3 class="">Follow these instructions to get started: </h3>
+              <ol class="">
+                <li>In the search bar above, type the name of the artist you want to hear.</li>
+                <li>Select the desired artist from the results provided to pull up their available tracks.</li>
+                <li>Select the track you want to play to begin streaming it.</li>
+                <li>Rock out and dance your socks off.</li>
+              </ol>
+            </div>
+            <div class="caution">
+              <h4>Keep In Mind:</h4>
+              <p class="">SoundCloud.com is a site primarily dedicated to providing exposure to lesser known artists. Because of this, you will not be able to stream many of the more popular artists. So, get creative. Search for those indie bands that you don't hear every day on the local hits radio station.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
     </div>
 
     <script type="text/javascript" src="main.js"></script>
