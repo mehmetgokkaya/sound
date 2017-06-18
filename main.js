@@ -88,22 +88,48 @@ function artistSearch (artist) {
 
           if (json.length === 0) {
             console.log('failure')
-            resultsSection.textContent = 'Unfortunately the artist you selected has no free tracks available for play. Please search again.'
+            resultsSection.textContent = 'Oops! Unfortunately, the artist you selected does not provide any free tracks for streaming. Please search again.'
           } else {
             console.log('success')
+
+            let trackHeading =
+            `<div class="sort-bar">
+              <h4 id="sorting">Results Sorted Alphabetically</h4>
+            </div>`
+
+            resultsSection.insertAdjacentHTML('beforeend', trackHeading)
+
+            var tracksArray = []
             for (var i = 0; i < json.length; i++) {
               let trackInfo = {}
               trackInfo.id = json[i].stream_url
               trackInfo.picture = json[i].artwork_url
               trackInfo.title = json[i].title
               trackInfo.artist = json[i].user.username
+              tracksArray.push(trackInfo)
+            }
 
+            tracksArray.sort(function (x, y) {
+              var a = x.title.toUpperCase()
+              var b = y.title.toUpperCase()
+
+              if (a > b) {
+                return 1
+              }
+              if (a < b) {
+                return -1
+              }
+              return 0
+            })
+
+            console.log(tracksArray)
+
+            for (var g = 0; g < tracksArray.length; g++) {
               let trackHTML = `
-
-                <div class="track" id="${trackInfo.id}" onclick="playTrack(this)">
-                  <img src="${trackInfo.picture}" alt="image not found" onerror=this.src="images/cd-case.png" class="track-pic">
-                  <p class="track-title">${trackInfo.title}</p>
-                  <p class="track-artist">${trackInfo.artist}</p>
+                <div class="track" id="${tracksArray[g].id}" onclick="playTrack(this)">
+                  <img src="${tracksArray[g].picture}" alt="image not found" onerror=this.src="images/cd-case.png" class="track-pic">
+                  <p class="track-title">${tracksArray[g].title}</p>
+                  <p class="track-artist">${tracksArray[g].artist}</p>
                 </div>`
 
               resultsSection.insertAdjacentHTML('beforeend', trackHTML)
