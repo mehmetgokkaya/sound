@@ -5,8 +5,6 @@ const resultsSection = document.querySelector('.results')
 const audio = document.querySelector('.music-player')
 const widget = document.querySelector('.widget')
 
-var artistPlayingName = ''
-
 function playTrack (currentTrackDiv) {
   console.log(currentTrackDiv.id)
   audio.src = `${currentTrackDiv.id}?client_id=8538a1744a7fdaa59981232897501e04`
@@ -88,13 +86,17 @@ function artistSearch (artist) {
 
           if (json.length === 0) {
             console.log('failure')
-            resultsSection.textContent = 'Oops! Unfortunately, the artist you selected does not provide any free tracks for streaming. Please search again.'
+            let failHeading =
+            `<h3 id="failHeading">Oops! Unfortunately, the artist you selected does not provide any free tracks for streaming. Please search again.</h3>
+            `
+
+            resultsSection.insertAdjacentHTML('beforeend', failHeading)
           } else {
             console.log('success')
 
             let trackHeading =
             `<div class="sort-bar">
-              <h4 id="sorting">Results Sorted Alphabetically</h4>
+              <h4 id="sorting">Results sorted alphabetically</h4>
             </div>`
 
             resultsSection.insertAdjacentHTML('beforeend', trackHeading)
@@ -127,7 +129,7 @@ function artistSearch (artist) {
             for (var g = 0; g < tracksArray.length; g++) {
               let trackHTML = `
                 <div class="track" id="${tracksArray[g].id}" onclick="playTrack(this)">
-                  <img src="${tracksArray[g].picture}" alt="image not found" onerror=this.src="images/cd-case.png" class="track-pic">
+                  <img src="${tracksArray[g].picture}" alt="image not found" onerror=this.src="images/rick-astley.jpg" class="track-pic">
                   <p class="track-title">${tracksArray[g].title}</p>
                   <p class="track-artist">${tracksArray[g].artist}</p>
                 </div>`
