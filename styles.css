@@ -326,4 +326,12 @@ header h1 {
     width: 20vw;
     height: 20vw;
   }
+
+  .instruct-and-warn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+  }
 }
