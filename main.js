@@ -1,4 +1,4 @@
-
+var mykey = config.MY_TOKEN
 const searchForm = document.querySelector('.search-form')
 const musicSearch = document.querySelector('#music-search')
 const resultsSection = document.querySelector('.results')
@@ -7,7 +7,7 @@ const widget = document.querySelector('.widget')
 
 function playTrack (currentTrackDiv) {
   console.log(currentTrackDiv.id)
-  audio.src = `${currentTrackDiv.id}?client_id=8538a1744a7fdaa59981232897501e04`
+  audio.src = `${currentTrackDiv.id}?client_id=${mykey}`
   audio.autoplay = true
 
   while (widget.hasChildNodes()) {
@@ -30,7 +30,7 @@ searchForm.addEventListener('submit', function (event) {
 })
 
 function artistSearch (artist) {
-  fetch(`https://api.soundcloud.com/users/?client_id=8538a1744a7fdaa59981232897501e04&q=${artist}`, {
+  fetch(`https://api.soundcloud.com/users/?client_id=${mykey}&q=${artist}`, {
   })
     .then(function (response) {
       return response.json()
@@ -73,7 +73,7 @@ function artistSearch (artist) {
     })
 
   function pullTracks (selectedName) {
-    fetch(`https://api.soundcloud.com/users/${selectedName}/tracks/?client_id=8538a1744a7fdaa59981232897501e04&limit=100`)
+    fetch(`https://api.soundcloud.com/users/${selectedName}/tracks/?client_id=${mykey}&limit=100`)
         .then(function (response) {
           return response.json()
         })
