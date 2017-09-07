@@ -1,4 +1,5 @@
-var mykey = config.MY_TOKEN
+// var mykey = config.MY_TOKEN
+var mykey = '8538a1744a7fdaa59981232897501e04'
 const searchForm = document.querySelector('.search-form')
 const musicSearch = document.querySelector('#music-search')
 const resultsSection = document.querySelector('.results')
