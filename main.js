@@ -31,7 +31,7 @@ searchForm.addEventListener('submit', function (event) {
 })
 
 function artistSearch (artist) {
-  fetch(`https://api.soundcloud.com/users/?client_id=${mykey}&q=${artist}`, {
+  fetch(`https://api-v2.soundcloud.com/users/?client_id=${mykey}&q=${artist}`, {
   })
     .then(function (response) {
       return response.json()
